@@ -20,6 +20,8 @@ function addTodo(event) {
     newLi.innerText = todoInput.value;
     newLi.classList.add('todo-item');
     todoDiv.appendChild(newLi);
+    //saving to local storage
+    saveToLocalStorage(todoInput.value);
     //create a delete button and a checked button
     const checkedButton = document.createElement('button');
     checkedButton.innerHTML = '<i class="fas fa-check"></i>'
@@ -55,6 +57,18 @@ function deleteCheck(e) {
     }
 }
 
+//adding todos to the local Storage
 
+function saveToLocalStorage(todo) {
+    let todos;
+    if(localStorage.getItem('todos') === null) {
+        todos = [];
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'))
+    }
+
+    todos.push(todo);
+    localStorage.setItem('todo', JSON.stringify(todos));
+}
 
 
